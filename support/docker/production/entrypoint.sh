@@ -13,6 +13,9 @@ fi
 # allow the container to be started with `--user`
 if [ "$1" = 'node' -a "$(id -u)" = '0' ]; then
     find /data ! -user peertube -exec  chown peertube:peertube {} \;
+    if [ -e '/dev/dri/renderD128' ]; then
+        chmod 777 /dev/dri/renderD128
+    fi
     exec gosu peertube "$0" "$@"
 fi
 
