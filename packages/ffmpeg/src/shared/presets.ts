@@ -88,7 +88,7 @@ export async function presetVOD (options: {
     if (streamType === 'video') {
       command.videoCodec(builderResult.encoder)
 
-      if (scaleFilterValue) {
+      if (scaleFilterValue && !builderResult.result.copy) {
         command.outputOption(`-vf ${getScaleFilter(builderResult.result)}=${scaleFilterValue}`)
       }
     } else if (streamType === 'audio') {
